@@ -26,19 +26,20 @@ int main() {
     // }
 
     // -> we r taking advantage of the sorted thing, two pointer approach time complexity O(n).
+    // in this two pointe approach we will make two pointers and compare things.
     vector<int> ans;
     int i=0,j=0;
     while(i<arr1.size() && j<arr2.size()) {
 
-        if(arr1[i] == arr2[j]) {
+        if(arr1[i] == arr2[j]) { // if both are same we will push that element into ans vector
             ans.push_back(arr1[i]);
-            i++;j++;
+            i++;j++; // and step up both pointers by one
         }
-        else if(arr1[i] < arr2[j]) {
+        else if(arr1[i] < arr2[j]) { // if the array 1's value is less than array2's value and we will increase the pointer of the array 1 which is i
             i++;
         }
         else if(arr1[i] > arr2[j]) {
-            j++;
+            j++; // same as above we will increase j by one if the array1's element is bigger than array2's value
         }
     }
     for(int ele: ans) {

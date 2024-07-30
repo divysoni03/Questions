@@ -28,27 +28,33 @@ Explanation: There is no cycle in the linked list.
  * };
  */
 class Solution {
-public:
+public: // in this question as we can see we have to find the staring position of the cycle or node which is connected by the last node
     ListNode *detectCycle(ListNode *head) {
-        if (head == nullptr || head->next == nullptr) return nullptr;
+        if (head == nullptr || head->next == nullptr) return nullptr; // we will return null if the list is empty or has only one node
 
+        // we are using floyd's cycle detection algorithm or we can say tortoise and hare algorithm 
         ListNode* slow = head;
         ListNode* fast = head;
 
-        while (fast != nullptr && fast->next != nullptr) {
-            slow = slow->next;
-            fast = fast->next->next;
-            if (slow == fast) break;
+        while (fast != nullptr && fast->next != nullptr) { // until fast pointer becomes null 
+            slow = slow->next; // slow will go one step at a time
+            fast = fast->next->next; // fast will go two steps at a time  
+            if (slow == fast) break; // we will break the loop if the cycle is detected when we will know that , when that slow and fast will
+            //meet in the cycle 
         }
 
-        if (fast == nullptr || fast->next == nullptr) return nullptr;
+        if (fast == nullptr || fast->next == nullptr) return nullptr; // edge case
 
-        slow = head;
+        slow = head; // now we will initialize the slow at starting of the linked list 
+        // and we will increase both by step one until both meet once again 
+        // and thats the position where cycle started
         while (slow != fast) {
             slow = slow->next;
             fast = fast->next;
         }
 
+        // we can return fast or slow because both are at the same position and that's the ans...
         return slow;
+        // return fast;
     }
 };

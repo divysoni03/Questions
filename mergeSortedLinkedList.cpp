@@ -26,24 +26,25 @@ Output: [0]
  * };
  */
 class Solution {
-public:
+public: // as we merged the sorted arrays we can use that type of login here
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        ListNode dummy;
-        ListNode* temp = &dummy;
+        ListNode dummy; // we will make a new linked list , dummy is the head of the new linked list
+        ListNode* temp = &dummy; // temp is the pointer to the dummy linked list, so we don't lost out head.
 
-        while((list1 != nullptr) && (list2 != nullptr)) {
-            if(list1->val < list2->val) {
+        while((list1 != nullptr) && (list2 != nullptr)) { // until both becomes null we will iterate through the linked list
+            if(list1->val < list2->val) { // we have to make the merged list sorted so we can say 
+            // when value of the first is less-then then we will insert it to the dummy 
                 temp->next = list1;
-                list1 = list1->next;
+                list1 = list1->next; //stepping up after storing the node into ans list
             }
             else {
                 temp->next = list2;
-                list2 = list2->next;
+                list2 = list2->next; //stepping up after storing the node into ans list
             }
             temp = temp->next;
         }
 
-        if (list1 != nullptr) {
+        if (list1 != nullptr) { // after the loop is over one node will be remaining and so we have to store it into ans list
             temp->next = list1;
         } else {
             temp->next = list2;

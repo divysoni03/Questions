@@ -22,22 +22,27 @@ Output: 3
 #include<vector>
 using namespace std;
 
+//as floyd's cycle detection algorithm we can use this in array also to find the duplicate value if both stops
+// on the same element then array contains duplicate element and we can even return the index of that
 int findDuplicate(vector<int>& nums) {
+    // first of all we will make two pointers that will iterates through the array 
     int slow = nums[0];
     int fast = nums[0];
     
     do {
         slow = nums[slow];
         fast = nums[nums[fast]];
-    } while (slow != fast);
+    } while (slow != fast); // we will check until both becomes same
     
-    slow = nums[0];
-    while (slow != fast) {
+    slow = nums[0]; // than we will take one pointer and and put it at start of the array and step ip both pointers
+    // with one steps
+    while (slow != fast) { //when both gets same again then thats the index where duplicate is present
         slow = nums[slow];
         fast = nums[fast];
     }
     
-    return slow;
+    return slow; // both are at same position so we can return either slow or fast;
+    // return fast;
 }
 
 int main() {
